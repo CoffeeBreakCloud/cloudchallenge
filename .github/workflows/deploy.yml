@@ -44,6 +44,13 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       - name: EC2 Public IP
         run: |
           IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=ubuntu-instance" "Name=instance-state-name,Values=running" \
@@ -54,6 +61,7 @@ jobs:
       - name: Setup SSH key
         run: |
           ls
+          ls terraform/ubuntu_key.pem
           chmod 400 ubuntu_key.pem
 
       - name: SSH into EC2 and run commands
