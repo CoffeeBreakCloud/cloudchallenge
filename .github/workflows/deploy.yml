@@ -56,11 +56,9 @@ jobs:
           aws-region: us-east-1
 
       - name: Get EC2 Public IP
-        id: ec2
         run: |
-          IP=$(aws ec2 describe-instances 
-            --filters "Name=tag:ubuntu-instance,Values=ubuntu-instance" "Name=ubuntu-instance,Values=running" \
-            --query "Reservations[0].Instances[0].PublicIpAddress" \
+          IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=ubuntu-instance" "Name=instance-state-name,Values=running" \
+          --query "Reservations[0].Instances[0].PublicIpAddress" \
             --output text)
           echo "EC2_IP=$IP" >> $GITHUB_ENV
 
