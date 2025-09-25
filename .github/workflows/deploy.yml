@@ -37,10 +37,13 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: |
-          terraform plan -no-color
-          rm -rf ubuntu_ssh_key.pem
+        run: terraform plan -no-color
 
+      - name: Delete SSH
+        run:  |
+          ls
+          rm -rf ubuntu_ssh_key.pem
+      
       - name: Terraform Apply
         run: terraform apply -auto-approve
       
