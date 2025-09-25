@@ -39,6 +39,22 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -no-color
 
+      - name: Delete SSH
+        run:  |
+          ls
+      
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+      
+      - name: Deploy Application
+        run: ./deploy.sh
+
+      - name: Manual Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          approvers: 'CoffeeBreakCloud' # Specify individuals or teams
+          issue-title: "Destroy Approval Required"
+          exclude-workflow-initiator: false
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve    
