@@ -7,18 +7,6 @@ resource "aws_instance" "ubuntu_instance" {
   associate_public_ip_address = true
 
 
-  user_data = <<-EOF
-#!/bin/bash
-sudo yum update -y
-curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -
-sudo yum install -y nodejs git
-cd /home/ec2-user
-
-cd app/app
-npm install
-npm run start &
-EOF
-
   tags = {
     Name = "ubuntu-instance"
   }

@@ -1,6 +1,7 @@
 app/node_modules/
 .terraform/
 .terraform.lock.hcl
+.terraform.tfstate.lock.info
 *.tfstate
 *.tfstate.backup
 terraform/ubuntu_ssh_key.pem

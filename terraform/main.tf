@@ -17,5 +17,4 @@ module "compute" {
   instance_type = var.instance_type
   subnet_id     = module.network.subnet_id
   sg_id         = module.security.sg_id
-
 }
