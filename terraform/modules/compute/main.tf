@@ -33,7 +33,7 @@ resource "aws_key_pair" "deployer" {
   key_name   = "ubuntu_key"
   public_key = tls_private_key.ssh_key.public_key_openssh
 
-  provisioner "local-exec" { # Create a "ubuntu_ssh_key.pem" to your computer!!
-    command = "echo '${tls_private_key.ssh_key.private_key_pem}' > ./ubuntu_ssh_key.pem"
+  provisioner "local-exec" { # Create a "ubuntu_ssh_key.pem" 
+    command = "echo '${tls_private_key.ssh_key.private_key_pem}' > ./ubuntu_key.pem"
   }
 }
