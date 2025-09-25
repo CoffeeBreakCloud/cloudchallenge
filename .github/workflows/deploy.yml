@@ -64,6 +64,7 @@ jobs:
 
       - name: Setup SSH key
         run: |
+          ls
           ls terraform/ubuntu_key.pem
           chmod 400 ubuntu_key.pem
 
