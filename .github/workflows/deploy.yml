@@ -11,7 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-  deploy:
+  
+  infraestructura:
     name: "Terraform"
     runs-on: ubuntu-latest
     env:
@@ -38,23 +39,31 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -no-color
-
-      - name: Delete SSH
-        run:  |
-          ls
       
       - name: Terraform Apply
         run: terraform apply -auto-approve
-      
-      - name: Deploy Application
-        run: ./deploy.sh
 
-      - name: Manual Approval
-        uses: trstringer/manual-approval@v1
-        with:
-          approvers: 'CoffeeBreakCloud' # Specify individuals or teams
-          issue-title: "Destroy Approval Required"
-          exclude-workflow-initiator: false
+  deploy:
+      name: "deploy"
+      runs-on: ubuntu-latest
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      steps: 
+      - name: Get EC2 Public IP
+        id: ec2
+        run: |
+          IP=$(aws ec2 describe-instances 
+            --filters "Name=tag:ubuntu-instance,Values=ubuntu-instance" "Name=ubuntu-instance,Values=running" \
+            --query "Reservations[0].Instances[0].PublicIpAddress" \
+            --output text)
+          echo "EC2_IP=$IP" >> $GITHUB_ENV
 
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve    
+      - name: Setup SSH key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ec2-key.pem
+          chmod 400 ec2-key.pem
+
+      - name: SSH into EC2 and run commands
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ec2-user@$EC2_IP "hostname && uptime && df -h"
