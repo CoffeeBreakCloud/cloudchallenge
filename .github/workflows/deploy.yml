@@ -30,5 +30,15 @@ jobs:
           terraform_version: 1.0.1
           terraform_wrapper: false
 
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -no-color
+
+
       - name: Terraform Destroy
         run: terraform destroy -auto-approve    
