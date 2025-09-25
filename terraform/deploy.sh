@@ -1,6 +1,6 @@
 #!/bin/bash
 username='ubuntu'
-IPinstance=$(terraform output public_ip)
+IPinstance=$(terraform output ec2_public_ip)
 MY_SSH_KEY='ubuntu_ssh_key.pem'
 chmod 400 ${MY_SSH_KEY}
 
