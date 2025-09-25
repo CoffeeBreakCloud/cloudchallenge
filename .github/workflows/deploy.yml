@@ -64,7 +64,7 @@ jobs:
 
       - name: Setup SSH key
         run: |
-          echo terraform/ubuntu_key.pem
+          ls terraform/ubuntu_key.pem
           chmod 400 ubuntu_key.pem
 
       - name: SSH into EC2 and run commands
