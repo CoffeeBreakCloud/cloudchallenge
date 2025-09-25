@@ -69,4 +69,4 @@ jobs:
 
       - name: SSH into EC2 and run commands
         run: |
-          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ec2-user@$EC2_IP "hostname && uptime && df -h"
+          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ubuntu@$EC2_IP "hostname && uptime && df -h"
