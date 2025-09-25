@@ -64,9 +64,9 @@ jobs:
 
       - name: Setup SSH key
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" > ec2-key.pem
-          chmod 400 ec2-key.pem
+          echo terraform/ubuntu_key.pem
+          chmod 400 ubuntu_key.pem
 
       - name: SSH into EC2 and run commands
         run: |
-          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ubuntu@$EC2_IP "hostname && uptime && df -h"
+          ssh -o StrictHostKeyChecking=no -i ubuntu_key.pem ubuntu@$EC2_IP "hostname && uptime && df -h"
