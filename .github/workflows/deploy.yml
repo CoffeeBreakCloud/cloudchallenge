@@ -35,15 +35,15 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i CodeChallenger.pem ubuntu@$EC2_IP << 'EOF'
             echo "Logging into Docker Hub..."
-            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+            echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
             
             echo "Pulling latest Docker image..."
-            docker pull ${{ secrets.DOCKER_USERNAME }}/cloudchallenger:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/cloudchallenger:latest
 
             echo "Stopping old container (if exists)..."
-            docker rm -f app || true
+            sudo docker rm -f app || true
 
             echo "Starting new container..."
-            docker run -d -p 3000:3000 --name app \
+            sudo docker run -d -p 3000:3000 --name app \
               ${{ secrets.DOCKER_USERNAME }}/cloudchallenger:latest
           EOF
