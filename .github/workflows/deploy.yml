@@ -65,7 +65,7 @@ jobs:
 
       - name: SSH into EC2 and run commands
         run: |
-          scp -o StrictHostKeyChecking=no -i CodeChallenger.pem -r ./ ubuntu@$EC2_IP:/home/ubuntu/app
+          scp -o StrictHostKeyChecking=no -i CodeChallenger.pem -r ../app ubuntu@$EC2_IP:/home/ubuntu/app
           ssh -o StrictHostKeyChecking=no -i CodeChallenger.pem ubuntu@$EC2_IP << 'EOF'
             echo "Login to instance"
             sudo apt update -y
