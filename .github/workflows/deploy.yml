@@ -92,4 +92,5 @@ jobs:
               echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
                docker pull ${{ secrets.DOCKER_USERNAME }}/coffeebreakcloud/cloudchallenger:latest
               docker images
+              ls
           EOF
