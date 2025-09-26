@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 
 app.get('/', (req, res) => {
-res.send('Hola mundo desde github actions v1');
+res.send('Hola mundo desde github actions v2');
 });
 
 
