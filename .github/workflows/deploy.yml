@@ -1,13 +1,14 @@
 name: CI/CD - Deploy to EC2
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [infraestructura,build]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
