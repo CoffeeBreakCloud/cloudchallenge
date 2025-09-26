@@ -60,9 +60,9 @@ jobs:
 
       - name: Setup SSH key
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" > ubuntu_ssh_key.pem
-          chmod 400 ubuntu_ssh_key.pem
+          echo "${{ secrets.EC2_SSH_KEY }}" > CodeChallenger.pem
+          chmod 400 CodeChallenger.pem
 
       - name: SSH into EC2 and run commands
         run: |
-          ssh -o StrictHostKeyChecking=no -i ubuntu_ssh_key.pem ubuntu@$EC2_IP "hostname && uptime && df -h"
+          ssh -o StrictHostKeyChecking=no -i CodeChallenger.pem ubuntu@$EC2_IP "hostname && uptime && df -h"
