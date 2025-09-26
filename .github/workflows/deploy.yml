@@ -72,7 +72,7 @@ jobs:
 
       - name: Copy last code to EC2
         run: |
-          scp -o StrictHostKeyChecking=no -i CodeChallenger.pem -r ./ ubuntu@$EC2_IP:/home/ubuntu/app
+          scp -o StrictHostKeyChecking=no -i CodeChallenger.pem -r ./ ubuntu@$EC2_IP:/home/ubuntu/
 
       - name: SSH into EC2 and run commands
         run: |
@@ -82,12 +82,6 @@ jobs:
             sudo apt install -y git
             sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
             source ~/.bashrc
-            cd app/
-            ls -al
-            git pull
-            ls -al
-            pwd
             nvm install lts/hydrogen
-            npm install
-            npm run start
+            cd app/ && npm install && npm run start
           EOF
