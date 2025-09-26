@@ -5,10 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app    
+    runs-on: ubuntu-latest    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,6 +23,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ./app/dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/coffeebreakcloud/cloudchallenger:latest
   
