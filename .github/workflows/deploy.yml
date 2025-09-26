@@ -93,4 +93,4 @@ jobs:
               sudo docker rm -f app || true &&
               sudo docker run -d -p 3000:3000 --name app \
               ${{ secrets.DOCKER_USERNAME }}/cloudchallenger:latest
-          "EOF "        
+          "        
