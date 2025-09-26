@@ -25,5 +25,5 @@ jobs:
           context: ./app
           file: ./app/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/coffeebreakcloud/cloudchallenger:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/cloudchallenger:latest
   
